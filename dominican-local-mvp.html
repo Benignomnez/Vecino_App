@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      DomiReviews - Encuentra los mejores lugares en República Dominicana
+    </title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #e63946;
+        --secondary: #457b9d;
+        --light: #f1faee;
+        --dark: #1d3557;
+        --accent: #ffb703;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+      }
+
+      .navbar {
+        background-color: var(--primary);
+        box-shadow: none;
+        padding: 0.6rem 1rem;
+      }
+
+      .navbar-brand {
+        font-weight: bold;
+        font-size: 1.3rem;
+        color: white !important;
+      }
+
+      .nav-link {
+        color: rgba(255, 255, 255, 0.85) !important;
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: white !important;
+        transform: translateY(-1px);
+      }
+
+      .btn-outline-light {
+        border-width: 1px;
+      }
+
+      .btn-sm {
+        font-size: 0.85rem;
+      }
+
+      .badge {
+        font-weight: normal;
+      }
+
+      @media (max-width: 991.98px) {
+        .navbar-collapse {
+          padding: 1rem 0;
+        }
+
+        .nav-link {
+          padding: 0.5rem 0 !important;
+        }
+      }
+
+      .hero {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+          ),
+          url("/api/placeholder/1200/400");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 80px 0;
+        margin-bottom: 30px;
+        border-radius: 0 0 10px 10px;
+      }
+
+      .search-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .search-box {
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .search-input {
+        border: none;
+        padding: 15px 20px;
+        font-size: 16px;
+      }
+
+      .search-btn {
+        background-color: var(--accent);
+        border: none;
+        color: var(--dark);
+        padding: 15px 25px;
+        font-weight: bold;
+      }
+
+      .category-card {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        margin-bottom: 20px;
+        cursor: pointer;
+      }
+
+      .category-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .category-img {
+        height: 150px;
+        object-fit: cover;
+      }
+
+      .business-card {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        margin-bottom: 20px;
+        cursor: pointer;
+      }
+
+      .business-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .business-img {
+        height: 180px;
+        object-fit: cover;
+      }
+
+      .rating {
+        color: var(--accent);
+      }
+
+      .location-badge {
+        background-color: var(--secondary);
+        color: white;
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 4px;
+      }
+
+      .footer {
+        background-color: var(--dark);
+        color: white;
+        padding: 40px 0;
+        margin-top: 50px;
+      }
+
+      .auth-container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .social-auth-btn {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        font-weight: 500;
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+      }
+
+      .divider-line {
+        flex-grow: 1;
+        height: 1px;
+        background-color: #ddd;
+      }
+
+      .divider-text {
+        padding: 0 15px;
+        color: #777;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+          <!-- Logo -->
+          <a class="navbar-brand" href="#">
+            <i class="fas fa-utensils me-1"></i> VecinoApp
+          </a>
+
+          <!-- Mobile Toggle -->
+          <button
+            class="navbar-toggler border-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Main Navigation -->
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a class="nav-link active px-3" href="#">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link px-3" href="#">Restaurantes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link px-3" href="#">Servicios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link px-3" href="#">Entretenimiento</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link px-3" href="#"
+                  ><i class="fas fa-edit me-1"></i>Escribir</a
+                >
+              </li>
+            </ul>
+
+            <!-- Auth Buttons -->
+            <div class="d-flex align-items-center">
+              <a
+                href="#"
+                class="btn btn-sm btn-outline-light rounded-pill px-3 me-2"
+                >Iniciar</a
+              >
+              <a href="#" class="btn btn-sm btn-light rounded-pill px-3"
+                >Registrarse</a
+              >
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Trending Bar - Optional Secondary Navigation -->
+      <div class="bg-light py-1 d-none d-lg-block">
+        <div class="container">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <small class="text-muted me-3"
+                ><i class="fas fa-fire-alt text-danger me-1"></i>
+                Trending:</small
+              >
+              <div class="d-flex align-items-center">
+                <span class="badge bg-white text-dark shadow-sm me-2 px-2">
+                  <img
+                    src="/api/placeholder/16/16"
+                    class="rounded-circle me-1"
+                    alt="Restaurant"
+                  />
+                  Restaurante Típico <small class="text-danger">4.6 ★</small>
+                </span>
+                <span class="badge bg-white text-dark shadow-sm me-2 px-2">
+                  <img
+                    src="/api/placeholder/16/16"
+                    class="rounded-circle me-1"
+                    alt="Restaurant"
+                  />
+                  Elizondo Rest <small class="text-danger">4.5 ★</small>
+                </span>
+                <span class="badge bg-white text-dark shadow-sm px-2">
+                  <img
+                    src="/api/placeholder/16/16"
+                    class="rounded-circle me-1"
+                    alt="Restaurant"
+                  />
+                  Boga Boga <small class="text-danger">4.7 ★</small>
+                </span>
+              </div>
+            </div>
+            <div>
+              <a href="#" class="text-decoration-none text-muted small"
+                >Ver más <i class="fas fa-chevron-right fs-8"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section with Search -->
+    <section class="hero">
+      <div class="container">
+        <div class="text-center mb-4">
+          <h1 class="display-4 fw-bold">
+            Descubre lo mejor de República Dominicana
+          </h1>
+          <p class="lead">
+            Encuentra restaurantes, hoteles, servicios y más con reseñas reales
+            de la comunidad
+          </p>
+        </div>
+        <div class="search-container">
+          <div class="input-group search-box">
+            <input
+              type="text"
+              class="form-control search-input"
+              placeholder="Buscar restaurantes, bares, servicios..."
+            />
+            <select class="form-control search-input border-start">
+              <option>Santo Domingo</option>
+              <option>Santiago</option>
+              <option>Puerto Plata</option>
+              <option>Punta Cana</option>
+              <option>La Romana</option>
+            </select>
+            <button class="btn search-btn" type="button">
+              <i class="fas fa-search me-2"></i> Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+      <!-- Categories Section -->
+      <section class="mb-5">
+        <h2 class="mb-4">Categorías Populares</h2>
+        <div class="row">
+          <div class="col-6 col-md-3">
+            <div class="category-card">
+              <img
+                src="/api/placeholder/300/150"
+                class="w-100 category-img"
+                alt="Restaurantes"
+              />
+              <div class="p-3 text-center">
+                <h5>Restaurantes</h5>
+                <p class="text-muted mb-0">865 lugares</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="category-card">
+              <img
+                src="/api/placeholder/300/150"
+                class="w-100 category-img"
+                alt="Playas"
+              />
+              <div class="p-3 text-center">
+                <h5>Playas</h5>
+                <p class="text-muted mb-0">243 lugares</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="category-card">
+              <img
+                src="/api/placeholder/300/150"
+                class="w-100 category-img"
+                alt="Hoteles"
+              />
+              <div class="p-3 text-center">
+                <h5>Hoteles</h5>
+                <p class="text-muted mb-0">412 lugares</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="category-card">
+              <img
+                src="/api/placeholder/300/150"
+                class="w-100 category-img"
+                alt="Nightlife"
+              />
+              <div class="p-3 text-center">
+                <h5>Vida Nocturna</h5>
+                <p class="text-muted mb-0">187 lugares</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Businesses -->
+      <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2>Destacados en Santo Domingo</h2>
+          <a href="#" class="text-decoration-none"
+            >Ver todos <i class="fas fa-chevron-right ms-1"></i
+          ></a>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="business-card">
+              <img
+                src="/api/placeholder/400/200"
+                class="w-100 business-img"
+                alt="Restaurant"
+              />
+              <div class="p-3">
+                <div class="d-flex justify-content-between align-items-start">
+                  <h5>Adrian Tropical</h5>
+                  <span class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="text-muted ms-1">4.5</span>
+                  </span>
+                </div>
+                <div class="mb-2">
+                  <span class="badge bg-light text-dark me-1">Restaurante</span>
+                  <span class="badge bg-light text-dark">Dominicano</span>
+                </div>
+                <p class="text-muted small mb-2">
+                  El mejor mangú con salami de la ciudad. Recomendado para
+                  desayunos y el concepto abierto frente al malecón.
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="location-badge"
+                    ><i class="fas fa-map-marker-alt me-1"></i> Malecón</span
+                  >
+                  <span class="text-muted small">124 reseñas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="business-card">
+              <img
+                src="/api/placeholder/400/200"
+                class="w-100 business-img"
+                alt="Café"
+              />
+              <div class="p-3">
+                <div class="d-flex justify-content-between align-items-start">
+                  <h5>Cafeína</h5>
+                  <span class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span class="text-muted ms-1">4.0</span>
+                  </span>
+                </div>
+                <div class="mb-2">
+                  <span class="badge bg-light text-dark me-1">Café</span>
+                  <span class="badge bg-light text-dark">Brunch</span>
+                </div>
+                <p class="text-muted small mb-2">
+                  Excelente café de especialidad y ambiente tranquilo para
+                  trabajar. Buena conexión WiFi y enchufes en cada mesa.
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="location-badge"
+                    ><i class="fas fa-map-marker-alt me-1"></i> Zona
+                    Colonial</span
+                  >
+                  <span class="text-muted small">87 reseñas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="business-card">
+              <img
+                src="/api/placeholder/400/200"
+                class="w-100 business-img"
+                alt="Beach Club"
+              />
+              <div class="p-3">
+                <div class="d-flex justify-content-between align-items-start">
+                  <h5>Playa Azul</h5>
+                  <span class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span class="text-muted ms-1">4.8</span>
+                  </span>
+                </div>
+                <div class="mb-2">
+                  <span class="badge bg-light text-dark me-1">Beach Club</span>
+                  <span class="badge bg-light text-dark">Mariscos</span>
+                </div>
+                <p class="text-muted small mb-2">
+                  Club de playa con excelente servicio, comida fresca y vista
+                  increíble. Ideal para pasar el día en familia.
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="location-badge"
+                    ><i class="fas fa-map-marker-alt me-1"></i> Boca Chica</span
+                  >
+                  <span class="text-muted small">156 reseñas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Reviews -->
+      <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2>Reseñas Recientes</h2>
+          <a href="#" class="text-decoration-none"
+            >Ver todas <i class="fas fa-chevron-right ms-1"></i
+          ></a>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="d-flex mb-3">
+                  <img
+                    src="/api/placeholder/50/50"
+                    class="rounded-circle me-3"
+                    alt="User"
+                  />
+                  <div>
+                    <h5 class="mb-0">María Rodríguez</h5>
+                    <p class="text-muted mb-0 small">
+                      Santo Domingo, RD • 5 reseñas
+                    </p>
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <span class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </span>
+                  <a href="#" class="ms-2 text-decoration-none"
+                    >La Terraza Bar</a
+                  >
+                </div>
+                <p class="card-text">
+                  Visitamos este lugar el fin de semana y quedamos encantados.
+                  La comida estuvo deliciosa, especialmente los tostones
+                  rellenos y el chivo al caldero. El servicio fue rápido y
+                  amable. Definitivamente volveremos.
+                </p>
+                <div class="d-flex mt-3">
+                  <button class="btn btn-sm btn-outline-secondary me-2">
+                    <i class="far fa-thumbs-up me-1"></i> Útil (3)
+                  </button>
+                  <button class="btn btn-sm btn-outline-secondary me-2">
+                    <i class="far fa-comment me-1"></i> Comentar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="d-flex mb-3">
+                  <img
+                    src="/api/placeholder/50/50"
+                    class="rounded-circle me-3"
+                    alt="User"
+                  />
+                  <div>
+                    <h5 class="mb-0">José Méndez</h5>
+                    <p class="text-muted mb-0 small">
+                      Santiago, RD • 12 reseñas
+                    </p>
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <span class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </span>
+                  <a href="#" class="ms-2 text-decoration-none"
+                    >Hotel Palma Real</a
+                  >
+                </div>
+                <p class="card-text">
+                  La ubicación es buena, cerca de todo en el centro de la
+                  ciudad. Sin embargo, las habitaciones necesitan una
+                  actualización urgente. El aire acondicionado hacía mucho ruido
+                  y el desayuno era muy básico para el precio pagado.
+                </p>
+                <div class="d-flex mt-3">
+                  <button class="btn btn-sm btn-outline-secondary me-2">
+                    <i class="far fa-thumbs-up me-1"></i> Útil (7)
+                  </button>
+                  <button class="btn btn-sm btn-outline-secondary me-2">
+                    <i class="far fa-comment me-1"></i> Comentar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-4 mb-md-0">
+            <h5 class="mb-3">DomiReviews</h5>
+            <p class="mb-0">
+              Descubre lo mejor de República Dominicana con reseñas auténticas
+              de la comunidad local.
+            </p>
+          </div>
+          <div class="col-md-2 mb-4 mb-md-0">
+            <h6 class="mb-3">Explorar</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#" class="text-white-50 text-decoration-none"
+                  >Restaurantes</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-white-50 text-decoration-none"
+                  >Hoteles</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-white-50 text-decoration-none"
+                  >Servicios</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-white-50 text-decoration-none"
+                  >Playas</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-2 mb-4 mb-md-0">
+            <h6 class="mb-3">Acerca de</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#" class="text-white-50 text-decoration-none"
+                  >Sobre nosotros</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-white-50 text-decoration-none"
+                  >Cómo funciona</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-white-50 text-decoration-none"
+                  >Contacto</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-white-50 text-decoration-none"
+                  >Carreras</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6 class="mb-3">Conecta con nosotros</h6>
+            <div class="d-flex mb-3">
+              <a href="#" class="btn btn-outline-light btn-sm me-2"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="btn btn-outline-light btn-sm me-2"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="btn btn-outline-light btn-sm me-2"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="btn btn-outline-light btn-sm"
+                ><i class="fab fa-youtube"></i
+              ></a>
+            </div>
+            <p class="small text-white-50">Suscríbete para recibir novedades</p>
+            <div class="input-group">
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Tu correo electrónico"
+              />
+              <button class="btn btn-light" type="button">Suscribir</button>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4 bg-light opacity-25" />
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            <p class="small text-white-50 mb-0">
+              &copy; 2025 DomiReviews. Todos los derechos reservados.
+            </p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <a href="#" class="text-white-50 text-decoration-none small me-3"
+              >Términos de servicio</a
+            >
+            <a href="#" class="text-white-50 text-decoration-none small"
+              >Política de privacidad</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

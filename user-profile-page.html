@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil - DomiReviews</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #e63946;
+      --secondary: #457b9d;
+      --light: #f1faee;
+      --dark: #1d3557;
+      --accent: #ffb703;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+    }
+    
+    .navbar {
+      background-color: var(--primary);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 24px;
+      color: white !important;
+    }
+    
+    .nav-link {
+      color: rgba(255, 255, 255, 0.9) !important;
+      font-weight: 500;
+    }
+    
+    .profile-header {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1200/300');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 30px 0;
+      margin-bottom: 30px;
+      position: relative;
+    }
+    
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 4px solid white;
+      object-fit: cover;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .profile-stats {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 10px;
+    }
+    
+    .stat-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+    
+    .stat-label {
+      font-size: 14px;
+      color: #777;
+    }
+    
+    .nav-pills .nav-link.active {
+      background-color: var(--primary);
+    }
+    
+    .nav-pills .nav-link {
+      color: var(--dark);
+    }
+    
+    .review-card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    
+    .review-header {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .review-content {
+      padding: 15px;
+    }
+    
+    .review-footer {
+      padding: 10px 15px;
+      background-color: #f9f9f9;
+      border-top: 1px solid #eee;
+    }
+    
+    .rating {
+      color: var(--accent);
+    }
+    
+    .btn-outline-primary {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    
+    .btn-outline-primary:hover {
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+    
+    .list-card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      transition: transform 0.3s;
+    }
+    
+    .list-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .list-img {
+      height: 120px;
+      object-fit: cover;
+    }
+    
+    .footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 40px 0;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">DomiReviews</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Restaurantes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Servicios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Entretenimiento</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Escribir Reseña</a>
+          </li>
+        </ul>
+        <div class="dropdown">
+          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="/api/placeholder/40/40" class="rounded-circle me-2" width="32" height="32" alt="User">
+            <span>Carlos Martínez</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+            <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+            <li><a class="dropdown-item" href="#">Configuración</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Profile Header -->
+  <section class="profile-header">
+    <div class="container">
+      <div class="row align-items-end">
+        <div class="col-md-3 text-center text-md-start">
+          <img src="/api/placeholder/150/150" class="profile-img mb-3 mb-md-0" alt="Profile">
+        </div>
+        <div class="col-md-9">
+          <h1 class="mb-1">Carlos Martínez</h1>
+          <p class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>Santo Domingo, República Dominicana</p>
+          <p class="mb-3">Amante de la comida, la fotografía y los viajes. Buscando siempre los mejores lugares en RD.</p>
+          <button class="btn btn-light btn-sm me-2"><i class="fas fa-pencil-alt me-1"></i> Editar Perfil</button>
+          <button class="btn btn-outline-light btn-sm"><i class="fas fa-cog me-1"></i> Configuración</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Profile Stats -->
+    <div class="row profile-stats">
+      <div class="col-3 stat-item">
+        <div class="stat-value">27</div>
+        <div class="stat-label">Reseñas</div>
+      </div>
+      <div class="col-3 stat-item">
+        <div class="stat-value">14</div>
+        <div class="stat-label">Fotos</div>
+      </div>
+      <div class="col-3 stat-item">
+        <div class="stat-value">32</div>
+        <div class="stat-label">Seguidores</div>
+      </div>
+      <div class="col-3 stat-item">
+        <div class="stat-value">5</div>
+        <div class="stat-label">Listas</div>
+      </div>
+    </div>
+
+    <!-- Profile Content -->
+    <div class="row">
+      <div class="col-lg-8">
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-pills mb-4">
+          <li class="nav-item">
+            <a class="nav-link active" href="#reviews" data-bs-toggle="tab">Reseñas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#photos" data-bs-toggle="tab">Fotos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#lists" data-bs-toggle="tab">Listas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#followers" data-bs-toggle="tab">Seguidores</a>
+          </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+          <!-- Reviews Tab -->
+          <div class="tab-pane fade show active" id="reviews">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h4 class="mb-0">Reseñas Recientes</h4>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  Ordenar por
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                  <li><a class="dropdown-item" href="#">Más recientes</a></li>
+                  <li><a class="dropdown-item" href="#">Mejor calificación</a></li>
+                  <li><a class="dropdown-item" href="#">Peor calificación</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Review Cards -->
+            <div class="review-card">
+              <div class="review-header d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 class="mb-0"><a href="#" class="text-decoration-none">Restaurant La Mar</a></h5>
+                  <span class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </span>
+                </div>
+                <span class="text-muted small">2 días atrás</span>
+              </div>
+              <div class="review-content">
+                <p>Este lugar es increíble. Fuimos un sábado por la noche y la experiencia fue perfecta. La comida es deliciosa, especialmente los mariscos frescos. Pedimos la paella y el ceviche mixto, ambos platos estaban preparados a la perfección. El servicio fue rápido y el personal muy amable. Además, la vista al mar es espectacular durante la puesta de sol. Definitivamente volveré pronto.</p>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <img src="/api/placeholder/150/100" class="img-fluid rounded" alt="Restaurant">
+                  </div>
+                  <div class="col-4">
+                    <img src="/api/placeholder/150/100" class="img-fluid rounded" alt="Food">
+                  </div>
+                  <div class="col-4">
+                    <img src="/api/placeholder/150/100" class="img-fluid rounded" alt="Drinks">
+                  </div>
+                </div>
+              </div>
+              <div class="review-footer">
+                <div class="d-flex">
+                  <button class="btn btn-sm btn-outline-secondary me-2"><i class="far fa-thumbs-up me-1"></i> Útil (8)</button>
+                  <button class="btn btn-sm btn-outline-secondary me-2"><i class="far fa-comment me-1"></i> Comentar (2)</button>
+                  <button class="btn btn-sm btn-outline-secondary"><i class="far fa-share-square me-1"></i> Compartir</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="review-header d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 class="mb-0"><a href="#" class="text-decoration-none">Hotel Coral Beach</a></h5>
+                  <span class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </span>
+                </div>
+                <span class="text-muted small">1 semana atrás</span>
+              </div>
+              <div class="review-content">
+                <p>Pasamos un fin de semana en este hotel y tuvimos una experiencia mixta. Lo bueno: la ubicación es perfecta, justo frente a la playa con vistas increíbles. La piscina es grande y limpia. Lo malo: el servicio fue bastante lento, especialmente en el restaurante. Nuestra habitación tenía problemas con el aire acondicionado y tardaron un día entero en solucionarlo. El precio es un poco elevado para la calidad general que ofrecen.</p>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <img src="/api/placeholder/150/100" class="img-fluid rounded" alt="Hotel">
+                  </div>
+                </div>
+              </div>
+              <div class="review-footer">
+                <div class="d-flex">
+                  <button class="btn btn-sm btn-outline-secondary me-2"><i class="far fa-thumbs-up me-1"></i> Útil (3)</button>
+                  <button class="btn btn-sm btn-outline-secondary me-2"><i class="far fa-comment me-1"></i> Comentar (0)</button>
+                  <button class="btn btn-sm btn-outline-secondary"><i class="far fa-share-square me-1"></i> Compartir</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Photos Tab -->
+          <div class="tab-pane fade" id="photos">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h4 class="mb-0">Mis Fotos</h4>
+              <button class="btn btn-primary btn-sm"><i class="fas fa-upload me-2"></i> Subir Nuevas</button>
+            </div>
+            <div class="row">
+              <div class="col-md-4 col-6 mb-4">
+                <img src="/api/placeholder/300/200" class="img-fluid rounded" alt="Photo">
+              </div>
+              <div class="col-md-4 col-6 mb-4">
+                <img src="/api/placeholder/300/200" class="img-fluid rounded" alt="Photo">
+              </div>
+              <div class="col-md-4 col-6 mb-4">
+                <img src="/api/placeholder/300/200" class="img-fluid rounded" alt="Photo">
+              </div>
+              <div class="col-md-4 col-6 mb-4">
+                <img src="/api/placeholder/300/200" class="img-fluid rounded" alt="Photo">
+              </div>
+              <div class="col-md-4 col-6 mb-4">
+                <img src="/api/placeholder/300/200" class="img-fluid rounded" alt="Photo">
+              </div>
+              <div class="col-md-4 col-6 mb-4">
+                <img src="/api/placeholder/300/200" class="img-fluid rounded" alt="Photo">
+              </div>
+            </div>
+          </div>
+
+          <!-- Lists Tab -->
+          <div class="tab-pane fade" id="lists">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h4 class="mb-0">Mis Listas</h4>
+              <button class="btn btn-primary btn-sm"><i class="fas fa-plus me-2"></i> Crear Nueva Lista</button>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="list-card">
+                  <div class="position-relative">
+                    <img src="/api/placeholder/400/200" class="w-100 list-img" alt="List">
+                    <div class="position-absolute bottom-0 start-0 p-3 text-white">
+                      <h5 class="mb-0">Mejores Playas</h5>
+                      <p class="mb-0 small">8 lugares</p>
+                    </div>
+                  </div>
+                  <div class="p-3">
+                    <p class="text-muted small mb-2">Mi selección de las playas más hermosas y limpias de la República Dominicana.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye me-1"></i> Ver</button>
+                      <span class="text-muted small">Actualizada hace 3 días</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="list-card">
+                  <div class="position-relative">
+                    <img src="/api/placeholder/400/200" class="w-100 list-img" alt="List">
+                    <div class="position-absolute bottom-0 start-0 p-3 text-white">
+                      <h5 class="mb-0">Comida Local</h5>
+                      <p class="mb-0 small">12 lugares</p>
+                    </div>
+                  </div>
+                  <div class="p-3">
+                    <p class="text-muted small mb-2">Los mejores restaurantes para disfrutar de la auténtica cocina dominicana.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye me-1"></i> Ver</button>
+                      <span class="text-muted small">Actualizada hace 1 semana</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Followers Tab -->
+          <div class="tab-pane fade" id="followers">
+            <h4 class="mb-4">Mis Seguidores</h4>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <div class="card">
+                  <div class="card-body d-flex align-items-center">
+                    <img src="/api/placeholder/60/60" class="rounded-circle me-3" alt="User">
+                    <div>
+                      <h5 class="mb-0">Laura Gómez</h5>
+                      <p class="text-muted mb-1 small">Santiago, RD • 15 reseñas</p>
+                      <button class="btn btn-sm btn-outline-primary">Seguir</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="card">
+                  <div class="card-body d-flex align-items-center">
+                    <img src="/api/placeholder/60/60" class="rounded-circle me-3" alt="User">
+                    <div>
+                      <h5 class="mb-0">Pedro Sánchez</h5>
+                      <p class="text-muted mb-1 small">Punta Cana, RD • 23 reseñas</p>
+                      <button class="btn btn-sm btn-outline-primary">Seguir</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="card">
+                  <div class="card-body d-flex align-items-center">
+                    <img src="/api/placeholder/60/60" class="rounded-circle me-3" alt="User">
+                    <div>
+                      <h5 class="mb-0">Ana Peña</h5>
+                      <p class="text-muted mb-1 small">Santo Domingo, RD • 8 reseñas</p>
+                      <button class="btn btn-sm btn-outline-primary">Seguir</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="card">
+                  <div class="card-body d-flex align-items-center">
+                    <img src="/api/placeholder/60/60" class="rounded-circle me-3" alt="User">
+                    <div>
+                      <h5 class="mb-0">Miguel Rojas</h5>
+                      <p class="text-muted mb-1 small">La Romana, RD • 19 reseñas</p>
+                      <button class="btn btn-sm btn-outline-primary">Seguir</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <!-- Activity Feed -->
+        <div class="card mb-4">
+          <div class="card-header bg-white">
+            <h5 class="mb-0">Actividad Reciente</h5>
+          </div>
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item py-3">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3 text-center">
+                    <div class="bg-light rounded-circle p-2">
+                      <i class="fas fa-star text-warning"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <p class="mb-0">Escribiste una reseña para <a href="#" class="text-decoration-none fw-bold">Restaurant La Mar</a></p>
+                    <p class="text-muted small mb-0">2 días atrás</p>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item py-3">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3 text-center">
+                    <div class="bg-light rounded-circle p-2">
+                      <i class="fas fa-camera text-primary"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <p class="mb-0">Subiste 3 fotos en <a href="#" class="text-decoration-none fw-bold">Hotel Coral Beach</a></p>
+                    <p class="text-muted small mb-0">1 semana atrás</p>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item py-3">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3 text-center">
+                    <div class="bg-light rounded-circle p-2">
+                      <i class="fas fa-list text-success"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <p class="mb-0">Creaste una nueva lista <a href="#" class="text-decoration-none fw-bold">Mejores Playas</a></p>
+                    <p class="text-muted small mb-0">2 semanas atrás</p>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item py-3">
+                <div class="d-flex">
+                  <div class="flex-shrink-0 me-3 text-center">
+                    <div class="bg-light rounded-circle p-2">
+                      <i class="fas fa-user-plus text-info"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <p class="mb-0">Comenzaste a seguir a <a href="#" class="text-decoration-none fw-bold">Laura Gómez</a></p>
+                    <p class="text-muted small mb-0">3 semanas atrás</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer bg-white text-center">
+            <a href="#" class="text-decoration-none">Ver toda la actividad</a>
+          </div>
+        </div>
+
+        <!-- Badges -->
+        <div class="card mb-4">
+          <div class="card-header bg-white">
+            <h5 class="mb-0">Mis Insignias</h5>
+          </div>
+          <div class="card-body">
+            <div class="row text-center">
+              <div class="col-4 mb-3">
+                <div class="bg-light rounded-circle p-3 mx-auto" style="width: 60px; height: 60px;">
+                  <i class="fas fa-star text-warning" style="font-size: 24px;"></i>
+                </div>
+                <p class="small mt-2 mb-0">Reviewer</p>
+              </div>
+              <div class="col-4 mb-3">
+                <div class="bg-light rounded-circle p-3 mx-auto" style="width: 60px; height: 60px;">
+                  <i class="fas fa-utensils text-danger" style="font-size: 24px;"></i>
+                </div>
+                <p class="small mt-2 mb-0">Foodie</p>
+              </div>
+              <div class="col-4 mb-3">
+                <div class="bg-light rounded-circle p-3 mx-auto" style="width: 60px; height: 60px;">
+                  <i class="fas fa-camera text-primary" style="font-size: 24px;"></i>
+                </div>
+                <p class="small mt-2 mb-0">Fotógrafo</p>
+              </div>
+              <div class="col-4 mb-3">
+                <div class="bg-light rounded-circle p-3 mx-auto" style="width: 60px; height: 60px;">
+                  <i class="fas fa-map-marker-alt text-success" style="font-size: 24px;"></i>
+                </div>
+                <p class="small mt-2 mb-0">Explorer</p>
+              </div>
+              <div class="col-4 mb-3">
+                <div class="bg-light rounded-circle p-3 mx-auto" style="width: 60px; height: 60px;">
+                  <i class="fas fa-umbrella-beach text-info" style="font-size: 24px;"></i>
+                </div>
+                <p class="small mt-2 mb-0">Beach Lover</p>
+              </div>
+              <div class="col-4 mb-3">
+                <div class="bg-light rounded-circle p-3 mx-auto" style="width: 60px; height: 60px; filter: grayscale(100%);">
+                  <i class="fas fa-cocktail text-secondary" style="font-size: 24px;"></i>
+                </div>
+                <p class="small mt-2 mb-0">Nightlife</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h5 class="mb-3">DomiReviews</h5>
+          <p class="mb-0">Descubre lo mejor de República Dominicana con reseñas auténticas de la comunidad local.</p>
+        </div>
+        <div class="col-md-2 mb-4 mb-md-0">
+          <h6 class="mb-3">Explorar</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white-50 text-decoration-none">Restaurantes</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Hoteles</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Servicios</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Playas</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 mb-4 mb-md-0">
+          <h6 class="mb-3">Acerca de</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white-50 text-decoration-none">Sobre nosotros</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Cómo funciona</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Contacto
