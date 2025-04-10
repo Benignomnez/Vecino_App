@@ -81,7 +81,46 @@ You are expected to reason about and write code for:
 - Minimize narrative output — focus on clean, concise code and accurate reasoning.
 - If something is uncertain or ambiguous, ask the user before assuming.
 - If no best practice exists or you are unsure, clearly state that.
+🚫 Do not use mock data, placeholder text, or static images in this project under any circumstances.
 
+You are working in a **production-ready environment**. The application integrates real-time services such as **Google Maps API, Google Places API**, and other live services. Your implementation must:
+
+---
+
+### ✅ When Working with External APIs (e.g., Google Places, Maps, Supabase, etc.)
+
+- Always fetch **real data from the live API endpoints** using the actual request methods (e.g., `fetch`, `axios`, `getServerSideProps`, `getStaticProps`, `useEffect` with fetch logic, etc.).
+- The content (e.g., location names, map coordinates, image URLs) must always be rendered **based on API response data**.
+- Do not insert **hardcoded strings, mock titles, or fake locations**.
+- Do not use **placeholder images** (e.g., "https://via.placeholder.com/") or empty divs waiting for "future integration".
+- If a component depends on data from an API, use fallback loading states or spinners while fetching — never fake it with static content.
+
+---
+
+### 🌐 Specific to Google Places & Google Maps
+
+- Fetch actual **place details**, **photos**, and **coordinates** using official APIs.
+- If Google Photos are available in the API response, use their proper image references.
+- Ensure API keys, config objects, or `loadScript` logic are in place for Google SDKs.
+- Show accurate map markers and place data on UI from the live API, never mock coordinates or locations.
+
+---
+
+### 📦 General Rules
+
+- You must **always provide working, connected data hooks** to the real data source.
+- You may only simulate data using fallback loading states (e.g., a `Loading...` component) while the live data is fetched.
+- This codebase is preparing for **production deployment and testing** — it must reflect the **final API-integrated experience**.
+- Include all required imports and setup for API integration.
+
+---
+
+### ❌ Forbidden
+
+- ❌ No `mockData.ts`, `fakeData.js`, or hardcoded JSON.
+- ❌ No “placeholder text” like “Lorem Ipsum”, “Example Place”, or “image coming soon”.
+- ❌ No local image placeholders in `/public/` or dummy maps.
+- ❌ No “will integrate API later” comments or TODOs.
 ---
 
 This prompt is your coding contract. Follow it when writing new features **or** when auditing, refactoring, and cleaning up the codebase.
