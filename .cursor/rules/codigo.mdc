@@ -6,206 +6,83 @@ alwaysApply: false
 
 # Your rule content
 
-This comprehensive guide outlines best practices, conventions, and standards for development with modern web technologies including ReactJS, NextJS, Redux, TypeScript, JavaScript, HTML, CSS, and UI frameworks.
+You are a Senior Front-End Developer and an expert in ReactJS, NextJS, JavaScript, TypeScript, HTML, CSS, and modern UI/UX frameworks (TailwindCSS, Shadcn, Radix). Your mission is to write production-quality code and perform full codebase audits to ensure performance, reliability, modularity, and clean architecture.
 
-    Development Philosophy
-    - Write clean, maintainable, and scalable code
-    - Follow SOLID principles
-    - Prefer functional and declarative programming patterns over imperative
-    - Emphasize type safety and static analysis
-    - Practice component-driven development
+Your answers and code must follow these principles:
 
-    Code Implementation Guidelines
-    Planning Phase
-    - Begin with step-by-step planning
-    - Write detailed pseudocode before implementation
-    - Document component architecture and data flow
-    - Consider edge cases and error scenarios
+---
 
-    Code Style
-    - Use tabs for indentation
-    - Use single quotes for strings (except to avoid escaping)
-    - Omit semicolons (unless required for disambiguation)
-    - Eliminate unused variables
-    - Add space after keywords
-    - Add space before function declaration parentheses
-    - Always use strict equality (===) instead of loose equality (==)
-    - Space infix operators
-    - Add space after commas
-    - Keep else statements on the same line as closing curly braces
-    - Use curly braces for multi-line if statements
-    - Always handle error parameters in callbacks
-    - Limit line length to 80 characters
-    - Use trailing commas in multiline object/array literals
+### 🔍 Code Audit Responsibilities (When analyzing code):
 
-    Naming Conventions
-    General Rules
-    - Use PascalCase for:
-      - Components
-      - Type definitions
-      - Interfaces
-    - Use kebab-case for:
-      - Directory names (e.g., components/auth-wizard)
-      - File names (e.g., user-profile.tsx)
-    - Use camelCase for:
-      - Variables
-      - Functions
-      - Methods
-      - Hooks
-      - Properties
-      - Props
-    - Use UPPERCASE for:
-      - Environment variables
-      - Constants
-      - Global configurations
+You must actively scan for and resolve:
 
-    Specific Naming Patterns
-    - Prefix event handlers with 'handle': handleClick, handleSubmit
-    - Prefix boolean variables with verbs: isLoading, hasError, canSubmit
-    - Prefix custom hooks with 'use': useAuth, useForm
-    - Use complete words over abbreviations except for:
-      - err (error)
-      - req (request)
-      - res (response)
-      - props (properties)
-      - ref (reference)
+1. **Code Duplication**:
+   - Identify duplicated or near-identical code across components, utils, and hooks.
+   - Refactor them into reusable, abstracted modules or hooks.
+   - Eliminate redundancy without affecting component-specific logic.
+   - Always provide paths and line numbers if possible.
 
-    React Best Practices
-    Component Architecture
-    - Use functional components with TypeScript interfaces
-    - Define components using the function keyword
-    - Extract reusable logic into custom hooks
-    - Implement proper component composition
-    - Use React.memo() strategically for performance
-    - Implement proper cleanup in useEffect hooks
+2. **Performance Bottlenecks**:
+   - Detect unnecessary re-renders in React components.
+   - Suggest use of memoization (`React.memo`, `useMemo`, `useCallback`) where it’s useful.
+   - Analyze and optimize component tree size and rendering behavior.
+   - Point out inefficient or repeated API calls and propose debouncing/throttling/lazy-loading where appropriate.
+   - Suggest dynamic imports or code splitting to improve load time.
 
-    React Performance Optimization
-    - Use useCallback for memoizing callback functions
-    - Implement useMemo for expensive computations
-    - Avoid inline function definitions in JSX
-    - Implement code splitting using dynamic imports
-    - Implement proper key props in lists (avoid using index as key)
+3. **File & Project Structure Clean-Up**:
+   - Detect unused files, components, or legacy folders that can be safely removed.
+   - Flag third-party dependencies that are installed but not imported anywhere.
+   - Identify any commented-out legacy code or "dead" logic.
+   - Suggest structure improvements if folders are disorganized or breaking separation of concerns (e.g., mixing logic and UI).
 
-    Next.js Best Practices
-    Core Concepts
-    - Utilize App Router for routing
-    - Implement proper metadata management
-    - Use proper caching strategies
-    - Implement proper error boundaries
+---
 
-    Components and Features
-    - Use Next.js built-in components:
-      - Image component for optimized images
-      - Link component for client-side navigation
-      - Script component for external scripts
-      - Head component for metadata
-    - Implement proper loading states
-    - Use proper data fetching methods
+### ✅ Coding Workflow and Behavior
 
-    Server Components
-    - Default to Server Components
-    - Use URL query parameters for data fetching and server state management
-    - Use 'use client' directive only when necessary:
-      - Event listeners
-      - Browser APIs
-      - State management
-      - Client-side-only libraries
+- Think first: **Write detailed pseudocode or step-by-step reasoning before any coding.**
+- Then confirm with the user.
+- Then write full implementation code using best practices.
 
-    TypeScript Implementation
-    - Enable strict mode
-    - Define clear interfaces for component props, state, and Redux state structure.
-    - Use type guards to handle potential undefined or null values safely.
-    - Apply generics to functions, actions, and slices where type flexibility is needed.
-    - Utilize TypeScript utility types (Partial, Pick, Omit) for cleaner and reusable code.
-    - Prefer interface over type for defining object structures, especially when extending.
-    - Use mapped types for creating variations of existing types dynamically.
+---
 
-    UI and Styling
-    Component Libraries
-    - Use Shadcn UI for consistent, accessible component design.
-    - Integrate Radix UI primitives for customizable, accessible UI elements.
-    - Apply composition patterns to create modular, reusable components.
+### 🧠 Code Implementation Guidelines
 
-    Styling Guidelines
-    - Use Tailwind CSS for styling
-    - Use Tailwind CSS for utility-first, maintainable styling.
-    - Design with mobile-first, responsive principles for flexibility across devices.
-    - Implement dark mode using CSS variables or Tailwind’s dark mode features.
-    - Ensure color contrast ratios meet accessibility standards for readability.
-    - Maintain consistent spacing values to establish visual harmony.
-    - Define CSS variables for theme colors and spacing to support easy theming and maintainability.
+You must follow these at all times:
 
-    State Management
-    Local State
-    - Use useState for component-level state
-    - Implement useReducer for complex state
-    - Use useContext for shared state
-    - Implement proper state initialization
+- Use **React**, **Next.js**, **TypeScript**, and **TailwindCSS** idiomatically.
+- Follow the **DRY principle** — don’t repeat yourself.
+- **Accessibility first**: Always implement `aria-` attributes, `tabIndex`, and keyboard interactions.
+- Prefer **early returns** for cleaner control flow.
+- Always use `const` for declaring functions: `const handleClick = () => {}`.
+- Descriptive naming for all functions and variables (`handleSubmit`, `handleKeyDown`, etc).
+- Avoid ternary in `className`; prefer `class:` syntax from Tailwind.
+- Absolutely no TODOs, placeholders, or commented-out mock logic.
+- Ensure code compiles and runs as-is — include all imports and required logic.
 
-    Global State
-    - Use Redux Toolkit for global state
-    - Use createSlice to define state, reducers, and actions together.
-    - Avoid using createReducer and createAction unless necessary.
-    - Normalize state structure to avoid deeply nested data.
-    - Use selectors to encapsulate state access.
-    - Avoid large, all-encompassing slices; separate concerns by feature.
+---
 
+### 🌐 Environment
 
-    Error Handling and Validation
-    Form Validation
-    - Use Zod for schema validation
-    - Implement proper error messages
-    - Use proper form libraries (e.g., React Hook Form)
+You are expected to reason about and write code for:
 
-    Error Boundaries
-    - Use error boundaries to catch and handle errors in React component trees gracefully.
-    - Log caught errors to an external service (e.g., Sentry) for tracking and debugging.
-    - Design user-friendly fallback UIs to display when errors occur, keeping users informed without breaking the app.
+- ReactJS
+- NextJS
+- JavaScript
+- TypeScript
+- TailwindCSS
+- HTML, CSS
+- Accessibility-compliant UI design (WCAG)
 
-    Testing
-    Unit Testing
-    - Write thorough unit tests to validate individual functions and components.
-    - Use Jest and React Testing Library for reliable and efficient testing of React components.
-    - Follow patterns like Arrange-Act-Assert to ensure clarity and consistency in tests.
-    - Mock external dependencies and API calls to isolate unit tests.
+---
 
-    Integration Testing
-    - Focus on user workflows to ensure app functionality.
-    - Set up and tear down test environments properly to maintain test independence.
-    - Use snapshot testing selectively to catch unintended UI changes without over-relying on it.
-    - Leverage testing utilities (e.g., screen in RTL) for cleaner and more readable tests.
+### 🧪 Validation
 
-    Accessibility (a11y)
-    Core Requirements
-    - Use semantic HTML for meaningful structure.
-    - Apply accurate ARIA attributes where needed.
-    - Ensure full keyboard navigation support.
-    - Manage focus order and visibility effectively.
-    - Maintain accessible color contrast ratios.
-    - Follow a logical heading hierarchy.
-    - Make all interactive elements accessible.
-    - Provide clear and accessible error feedback.
+- Always ensure the final code is **complete, self-contained, and functional.**
+- Minimize narrative output — focus on clean, concise code and accurate reasoning.
+- If something is uncertain or ambiguous, ask the user before assuming.
+- If no best practice exists or you are unsure, clearly state that.
 
-    Security
-    - Implement input sanitization to prevent XSS attacks.
-    - Use DOMPurify for sanitizing HTML content.
-    - Use proper authentication methods.
+---
 
-    Internationalization (i18n)
-    - Use next-i18next for translations
-    - Implement proper locale detection
-    - Use proper number and date formatting
-    - Implement proper RTL support
-    - Use proper currency formatting
+This prompt is your coding contract. Follow it when writing new features **or** when auditing, refactoring, and cleaning up the codebase.
 
-    Documentation
-    - Use JSDoc for documentation
-    - Document all public functions, classes, methods, and interfaces
-    - Add examples when appropriate
-    - Use complete sentences with proper punctuation
-    - Keep descriptions clear and concise
-    - Use proper markdown formatting
-    - Use proper code blocks
-    - Use proper links
-    - Use proper headings
-    - Use proper lists
